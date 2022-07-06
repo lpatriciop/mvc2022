@@ -21,7 +21,7 @@ public class ModelPgConecction {
     
     String cadenaConexion="jdbc:postgresql://localhost:5432/mvc";
     String pgUsuario="postgres";
-    String pgPassword="123";
+    String pgPassword="apecs";
     Connection con;
 
     public ModelPgConecction() {

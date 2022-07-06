@@ -128,7 +128,7 @@ public class ViewPersonas extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "IDENTIFICACIÓN", "NOMBRES", "APELLIDOS", "CORREO"
             }
         ));
         jScrollPane1.setViewportView(tblPersonas);

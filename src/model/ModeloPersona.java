@@ -32,12 +32,12 @@ public class ModeloPersona extends Persona{
     
        List<Persona> listaPersonas= new ArrayList<Persona>();
        
-        String sql="select * from personas";
+        String sql="select * from persona";
         ResultSet rs= mpgc.consulta(sql);
         try {
             while(rs.next()){
                 Persona persona=new Persona();
-                persona.setIdPersona(rs.getString("idpsersona"));
+                persona.setIdPersona(rs.getString("idpersona"));
                 persona.setNombre(rs.getString("nombres"));
                 persona.setApellido(rs.getString("apellidos"));
                 listaPersonas.add(persona);
