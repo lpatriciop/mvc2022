@@ -27,7 +27,14 @@ public class ModeloPersona extends Persona{
         super(idPersona, nombre, apellido);
     }
     //MANEJAR DATOS DE LA BASE DE DATOS.
-    
+    public boolean setPersona(){
+    String sql;//INSERT INTO persona(idpersona)VALUES('010352888')
+    sql="INSERT INTO persona (idpersona,nombres,apellidos) "
+            + "VALUES ('"+ getIdPersona() +"'"
+            + ",'"+ getNombre()+"'"
+            + ",'"+ getApellido() +"')";
+           return mpgc.accion(sql); //EJECUTAMOS EL INSERT
+    }
     public List<Persona> getPersonas(){
     
        List<Persona> listaPersonas= new ArrayList<Persona>();
@@ -54,6 +61,29 @@ public class ModeloPersona extends Persona{
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

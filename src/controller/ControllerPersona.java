@@ -6,6 +6,7 @@
 package controller;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.ws.Holder;
 import model.ModeloPersona;
@@ -28,8 +29,49 @@ public class ControllerPersona {
     
     public void iniciaControl(){
     vista.getBtnBuscar().addActionListener(l->cargaDatos());
+    vista.getBtnCrear().addActionListener(l->abrirDialogo(1));
+    vista.getBtnEditar().addActionListener(l->abrirDialogo(2));
+    vista.getBtnAceptar().addActionListener(l->crearEditarPersona());
     }
-    
+    private void abrirDialogo( int op){
+        String titulo;
+        if (op==1){
+            titulo="Crear Persona";
+            vista.getDlgPersona().setName("C");
+            vista.getTxtIdPersona().setEnabled(true);
+        }else{
+            titulo="Editar Persona";
+            vista.getDlgPersona().setName("E");
+            vista.getTxtIdPersona().setEnabled(false);
+        }
+        vista.getDlgPersona().setTitle(titulo);
+        vista.getDlgPersona().setSize(600,300);
+        vista.getDlgPersona().setLocationRelativeTo(vista);
+        vista.getDlgPersona().setVisible(true);
+    }
+    private void crearEditarPersona(){
+        if(vista.getDlgPersona().getName().contentEquals("C")){
+                //INSERT
+                String identificacion=vista.getTxtIdPersona().getText();
+                String nombres=vista.getTxtNombre().getText();
+                String apellidos=vista.getTxtApellidos().getText();
+                
+                ModeloPersona persona=new ModeloPersona();
+                persona.setIdPersona(identificacion);
+                persona.setNombre(nombres);
+                persona.setApellido(apellidos);
+                //...
+                if(persona.setPersona()){//Grabamos.
+                    JOptionPane.showMessageDialog(vista
+                            ,"Persona creada satisfactoriamente." );
+                }else{
+                    JOptionPane.showMessageDialog(vista
+                            ,"No se pudo crear persona" );
+                }
+        }else{
+                //UPDATE
+        }
+    }
     private void cargaDatos(){
         DefaultTableModel estructuraTabla;
         estructuraTabla=(DefaultTableModel)
