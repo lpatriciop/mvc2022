@@ -5,8 +5,12 @@
  */
 package controller;
 
+import java.awt.Image;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.ws.Holder;
 import model.ModeloPersona;
@@ -73,6 +77,8 @@ public class ControllerPersona {
         }
     }
     private void cargaDatos(){
+        vista.getTblPersonas().setDefaultRenderer(Object.class, new ImagenTabla());
+        vista.getTblPersonas().setRowHeight(50);
         DefaultTableModel estructuraTabla;
         estructuraTabla=(DefaultTableModel)
                 vista.getTblPersonas().getModel();
@@ -80,7 +86,7 @@ public class ControllerPersona {
         List<Persona> listap= modelo.getPersonas();
         Holder<Integer> i = new Holder<>(0);
         listap.stream().forEach(persona->{
-            estructuraTabla.addRow(new Object[3]);
+            estructuraTabla.addRow(new Object[4]);
                 vista.getTblPersonas()
                         .setValueAt(persona.getIdPersona(),
                                 i.value,0);
@@ -90,6 +96,16 @@ public class ControllerPersona {
                 vista.getTblPersonas()
                         .setValueAt(persona.getApellido(),
                                 i.value,2);
+                Image foto= persona.getFoto();
+                if(foto!=null){
+                    foto=foto.getScaledInstance(50, 75, Image.SCALE_SMOOTH);
+                    ImageIcon icono=new ImageIcon(foto);
+                    DefaultTableCellRenderer dtcr=new DefaultTableCellRenderer();
+                    dtcr.setIcon(icono);
+                    vista.getTblPersonas().setValueAt(new JLabel(icono), i.value,3);
+                }else{//no venga foto.
+                vista.getTblPersonas().setValueAt(null, i.value,3);
+                }
         i.value++;
         });
       

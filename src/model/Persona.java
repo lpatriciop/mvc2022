@@ -20,6 +20,9 @@
 
 package model;
 
+import java.awt.Image;
+import java.io.FileInputStream;
+
 /**
  *
  * @author Patricio
@@ -28,6 +31,11 @@ public class Persona {
     private String idPersona;
     private String nombre;
     private String apellido;
+    
+    private Image foto;
+    //Guardar foto>
+    private FileInputStream imageFile;
+    private int length;
 
     public Persona() {
     }
@@ -36,6 +44,31 @@ public class Persona {
         this.idPersona = idPersona;
         this.nombre = nombre;
         this.apellido = apellido;
+        
+    }
+
+    public Image getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Image foto) {
+        this.foto = foto;
+    }
+
+    public FileInputStream getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(FileInputStream imageFile) {
+        this.imageFile = imageFile;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 
     public String getIdPersona() {
