@@ -8,6 +8,7 @@ package model;
 import java.awt.Image;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -43,6 +44,25 @@ public class ModeloPersona extends Persona{
             + ",'"+ getNombre()+"'"
             + ",'"+ getApellido() +"')";
            return mpgc.accion(sql); //EJECUTAMOS EL INSERT
+    }
+    
+    public boolean setPersonaFoto(){
+    String sql;
+    sql="INSERT INTO persona(idpersona,nombres,apellidos,foto)";
+    sql+="VALUES (?,?,?,?)";
+        try {
+            PreparedStatement ps=mpgc.con.prepareStatement(sql);
+            ps.setString(1, getIdPersona());
+            ps.setString(2, getNombre());
+            ps.setString(3, getApellido());
+            ps.setBinaryStream(4, getImageFile(),getLength());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ModeloPersona.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
     }
     public List<Persona> getPersonas(){
     

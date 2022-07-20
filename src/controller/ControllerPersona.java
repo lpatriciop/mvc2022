@@ -6,8 +6,16 @@
 package controller;
 
 import java.awt.Image;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.imageio.stream.FileImageInputStream;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -24,7 +32,7 @@ import view.ViewPersonas;
 public class ControllerPersona {
     private ModeloPersona modelo;
     private ViewPersonas vista;
-
+    private JFileChooser jfc;
     public ControllerPersona(ModeloPersona modelo, ViewPersonas vista) {
         this.modelo = modelo;
         this.vista = vista;
@@ -36,6 +44,26 @@ public class ControllerPersona {
     vista.getBtnCrear().addActionListener(l->abrirDialogo(1));
     vista.getBtnEditar().addActionListener(l->abrirDialogo(2));
     vista.getBtnAceptar().addActionListener(l->crearEditarPersona());
+    vista.getBtnExaminar().addActionListener(l->examinaFoto());
+    }
+    private void examinaFoto(){
+        jfc=new JFileChooser();
+        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int estado=jfc.showOpenDialog(vista);
+        if(estado==JFileChooser.APPROVE_OPTION){
+            try {
+                Image imagen=ImageIO.read(jfc.getSelectedFile()).getScaledInstance(
+                        vista.getLblFoto().getWidth(),
+                        vista.getLblFoto().getHeight(),
+                        Image.SCALE_DEFAULT);
+                
+                Icon icono=new ImageIcon(imagen);
+                vista.getLblFoto().setIcon(icono);
+                vista.getLblFoto().updateUI();
+            } catch (IOException ex) {
+                Logger.getLogger(ControllerPersona.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     private void abrirDialogo( int op){
         String titulo;
@@ -64,8 +92,21 @@ public class ControllerPersona {
                 persona.setIdPersona(identificacion);
                 persona.setNombre(nombres);
                 persona.setApellido(apellidos);
+                
+            try {
+                FileInputStream img=
+                        new FileInputStream(jfc.getSelectedFile());
+                int largo=(int)jfc.getSelectedFile().length();
+                persona.setImageFile(img);
+                persona.setLength(largo);
+                
+            } catch (IOException ex) {
+                Logger.getLogger(ControllerPersona.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+                
                 //...
-                if(persona.setPersona()){//Grabamos.
+                if(persona.setPersonaFoto()){//Grabamos.
                     JOptionPane.showMessageDialog(vista
                             ,"Persona creada satisfactoriamente." );
                 }else{
