@@ -146,6 +146,7 @@ public class ViewPersonas extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 153));
 
+        btnCrear.setBackground(new java.awt.Color(255, 51, 51));
         btnCrear.setText("Crear");
 
         btnEditar.setText("Editar");

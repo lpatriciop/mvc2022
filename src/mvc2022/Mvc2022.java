@@ -27,6 +27,7 @@ public class Mvc2022 {
         ControllerPersona controlador=
                 new ControllerPersona(modelo, vista);
         controlador.iniciaControl();
+        //Haciendo pruebas con git
     }
     
 }
