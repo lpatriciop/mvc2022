@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/MIS%20DOCUMENTOS/NetBeansProjects/mvc2022/mvc2022/src/view/ViewPersonas.java</file>
-            <file>file:/E:/MIS%20DOCUMENTOS/NetBeansProjects/mvc2022/mvc2022/src/model/ModeloPersona.java</file>
-            <file>file:/E:/MIS%20DOCUMENTOS/NetBeansProjects/mvc2022/mvc2022/src/controller/ImagenTabla.java</file>
-            <file>file:/E:/MIS%20DOCUMENTOS/NetBeansProjects/mvc2022/mvc2022/src/controller/ControllerPersona.java</file>
-            <file>file:/E:/MIS%20DOCUMENTOS/NetBeansProjects/mvc2022/mvc2022/src/model/Persona.java</file>
+            <file>file:/E:/MIS%20DOCUMENTOS/NetBeansProjects/MVCgitTest2022/mvc2022/src/mvc2022/Mvc2022.java</file>
+            <file>file:/E:/MIS%20DOCUMENTOS/NetBeansProjects/MVCgitTest2022/mvc2022/src/view/ViewPersonas.java</file>
+            <file>file:/E:/MIS%20DOCUMENTOS/NetBeansProjects/MVCgitTest2022/mvc2022/src/model/ModelPgConecction.java</file>
         </group>
     </open-files>
 </project-private>

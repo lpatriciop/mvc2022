@@ -67,5 +67,13 @@ public class ModelPgConecction {
         
         return correcto;
     }
+
+    public Connection getCon() {
+        return con;
+    }
+
+    public void setCon(Connection con) {
+        this.con = con;
+    }
     
 }

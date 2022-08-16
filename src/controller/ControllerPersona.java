@@ -21,8 +21,15 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.ws.Holder;
+import model.ModelPgConecction;
 import model.ModeloPersona;
 import model.Persona;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import view.ViewPersonas;
 
 /**
@@ -45,6 +52,21 @@ public class ControllerPersona {
     vista.getBtnEditar().addActionListener(l->abrirDialogo(2));
     vista.getBtnAceptar().addActionListener(l->crearEditarPersona());
     vista.getBtnExaminar().addActionListener(l->examinaFoto());
+    vista.getBtnImprimir().addActionListener(l->imprimeReporte());
+    }
+    private void imprimeReporte(){
+    //Instanciamos la conexion proyecto
+        ModelPgConecction con=new ModelPgConecction();
+        
+        try {
+            JasperReport jr=(JasperReport)JRLoader.loadObject(getClass().getResource("/view/reportes/ReportePersonas.jasper"));
+            JasperPrint jp = JasperFillManager.fillReport(jr, null,con.getCon());//llena el reporte con datos.
+            JasperViewer jv = new JasperViewer(jp,false);
+            jv.setVisible(true);
+        } catch (JRException ex) {
+            Logger.getLogger(ControllerPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     private void examinaFoto(){
         jfc=new JFileChooser();
