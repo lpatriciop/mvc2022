@@ -8,7 +8,9 @@ package controller;
 import java.awt.Image;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -60,7 +62,10 @@ public class ControllerPersona {
         
         try {
             JasperReport jr=(JasperReport)JRLoader.loadObject(getClass().getResource("/view/reportes/ReportePersonas.jasper"));
-            JasperPrint jp = JasperFillManager.fillReport(jr, null,con.getCon());//llena el reporte con datos.
+            Map<String,Object> parametros=new HashMap<String, Object>();
+            parametros.put("titulo","REPORTE DE VENTAS DEL MES MAYO");
+            parametros.put("sueldo", 300d);
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametros,con.getCon());//llena el reporte con datos.
             JasperViewer jv = new JasperViewer(jp,false);
             jv.setVisible(true);
         } catch (JRException ex) {
