@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2022-08-30T08:26:43 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportePersonas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="52443873-64db-4576-9ece-f16638d7ff1c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mvc"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="titulos" forecolor="#2D3C87" hTextAlign="Center" vTextAlign="Middle" fontName="Calibri" fontSize="12" isBold="true">
+		<pen lineWidth="1.0" lineStyle="Solid"/>
+		<box>
+			<topPen lineWidth="1.0" lineColor="#030202"/>
+			<leftPen lineWidth="1.0" lineColor="#030202"/>
+			<bottomPen lineWidth="1.0" lineColor="#030202"/>
+			<rightPen lineWidth="1.0" lineColor="#030202"/>
+		</box>
+	</style>
+	<style name="sueldo">
+		<box>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{sueldo}>=1000]]></conditionExpression>
+			<style forecolor="#209922" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{sueldo}>=500]]></conditionExpression>
+			<style forecolor="#FF6B36"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{sueldo}<500]]></conditionExpression>
+			<style forecolor="#FA0A76"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="sueldo" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[SELECT persona.idpersona as codigo,
+	persona.nombres,
+	persona.apellidos,
+	persona.telefono,
+	persona.sueldo
+FROM persona
+WHERE persona.sueldo>= $P{sueldo} 
+order by persona.apellidos]]>
+	</queryString>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="sueldo" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="43">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="380" y="20" width="175" height="18" uuid="34cd4d8d-a068-4834-91fe-f32ca5d629a1"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="25" width="375" height="13" uuid="ffa73c7e-51b4-4cbf-a2b3-7eef791c3f10"/>
+				<text><![CDATA[Reporte mensual de personas inscritas ...]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="4" y="0" width="550" height="20" forecolor="#E02522" uuid="48d6f04c-a20f-4cc8-812c-bc015d0e506f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="10" width="375" height="13" uuid="15c2c0f6-1cbb-4037-b231-fb17f05d272f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Personas Inscritas]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement style="titulos" mode="Transparent" x="80" y="0" width="150" height="20" uuid="9f206942-9c0b-4620-9e93-6688abd6c832">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="titulos" x="230" y="0" width="150" height="20" uuid="97f6b36b-718c-441a-bfe0-789a25d41b37">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[APELLIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="titulos" x="380" y="0" width="95" height="20" uuid="b3094cbc-69c5-40c8-bbdc-44b441ac2fbb"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELÉFONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="titulos" x="475" y="0" width="80" height="20" uuid="362dfb6e-83ea-4c44-b0ce-524f386ae986">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUELDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="titulos" x="0" y="0" width="80" height="20" uuid="af98e93a-501e-40da-a8de-42682314b456">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement style="sueldo" positionType="Float" x="0" y="0" width="80" height="20" uuid="a40a94e1-5cb5-4a6b-a416-7f663e4239aa">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box padding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="sueldo" x="80" y="0" width="150" height="20" uuid="07979cb5-7cf4-499c-b9f7-c966ec4294b5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="sueldo" x="230" y="0" width="150" height="20" uuid="b0c8ecc8-f24f-4421-92e1-c456b59ac3e9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="sueldo" x="380" y="0" width="95" height="20" uuid="f5de1df7-d283-447c-8daf-70ff529d14e1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box padding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="sueldo" x="475" y="0" width="80" height="20" uuid="691a3682-996e-4c6c-8f07-8e1e8d6bc1ea"/>
+				<box padding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{sueldo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="240" y="0" width="186" height="20" uuid="6d12e9b4-a535-4713-972f-686120b05185"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="430" y="0" width="125" height="20" uuid="a68c6331-0eba-408e-b914-eb2be67b42d1"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
